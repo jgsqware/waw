@@ -20,7 +20,15 @@ jobs:
     working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
     steps:
       - checkout
-
+      - run: go build
+      - run: docker build -t jgsqware/waw:${CIRCLE_SHA1}
+      - run: docker login -u jgsqware -p ${DOCKER_PASSWORD}
       # # specify any bash command here prefixed with `run: `
       # - run: go get -v -t -d ./...
       # - run: go test -v ./...
+  deploy-GKE:
+    docker:
+      - image: google/gcloud
+    working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
+    steps:
+      - run: ls
