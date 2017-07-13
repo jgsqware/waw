@@ -20,6 +20,7 @@ jobs:
     working_directory: /go/src/github.com/jgsqware/waw
     steps:
       - checkout
+      - run: ls && pwd
       - run: go build
       - run: docker build -t jgsqware/waw:${CIRCLE_SHA1}
       - run: docker login -u jgsqware -p ${DOCKER_PASSWORD}
