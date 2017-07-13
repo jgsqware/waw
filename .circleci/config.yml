@@ -20,7 +20,7 @@ jobs:
     working_directory: /go/src/github.com/jgsqware/waw
     steps:
       - checkout
-      - run: ls && pwd && /go/src/github.com/jgsqware/waw/vendor/googlemaps.github.io/maps
+      - run: ls && pwd && ls /go/src/github.com/jgsqware/waw/vendor/googlemaps.github.io/maps
       - run: GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build .
       - run: docker build -t jgsqware/waw:${CIRCLE_SHA1}
       - run: docker login -u jgsqware -p ${DOCKER_PASSWORD}
